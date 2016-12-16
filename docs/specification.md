@@ -83,5 +83,27 @@ The following fields can be searched. The search screen criteria would build cum
 Search results would be displayed in a grid with basic metadata including, Document Title, SWI#, Author, 
 Last Modified By and Created On. Also there would be a button to open the SWI edit screen and SWI viewer. 
 
+## Create / Edit SWI
+This screen would is used soley for the creation and modification of the SWIs. It is not intended as the display view. 
+This structure means that we can have more control over the display of the SWIs and also simplify the data entry and validation. 
 
+The SWI document is broken into the following sections:
+- **Header**
+    - Document Title
+    - Author
+    - Revision
+    - Expert
+    - Approver
+    - Company
+    - Private/Public Flag
+    - Created On
+    - Modified On
+- **Health & Safety**
+    - List of health and safety icons associated with the process
+- **Tooling**
+    - List of tooling panels containing an image, tooling number, caption text.
+- **Stages**
+    - List of process stages. 
+    - Option of different layouts. e.g. (Large image & caption), (Small image & caption & care point), (Text only)
+    - Dynamic layout, where stages take up the available space on the users device
 
