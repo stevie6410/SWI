@@ -25,7 +25,7 @@ Previously the iOS application "Inflowchart" was used to createthe documents. Th
     - REST compliant 
 
 ## Client (Web App)
-- Angular 2
+- Angular 2 for application framework
 - Bootstrap 3 for styling
 
 - Browser Compatibility
@@ -55,7 +55,7 @@ Login using B/E Aerospace Active Directory. We should not have to maintain seper
 The dashboard will act as the application home page and provide top level access to the menus and user specific information.
 The dashboard will be built up from "modules" which can show summary or basic detail information. 
 
-- My Recently Created SWIs
+- **My Recently Created SWIs**
     - Show the last 5 SWIs created by the logged in user
 - My Approval Queue (Approvers Only)
     - Show the SWIs which are waiting for the logged in users approval
