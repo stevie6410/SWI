@@ -11,9 +11,9 @@ Previously the iOS application "Inflowchart" was used to create
 
 ## Required Screens
 
-- ## Login 
+- Login 
     - Login using B/E Aerospace Active Directory
-- ## Dashboard
+- Dashboard
     - My Recently Created SWIs
         - Show the last 5 work instructions created by the logged in user
     - My Approval Queue
