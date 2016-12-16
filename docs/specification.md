@@ -52,23 +52,21 @@ The application would have the following roles:
 Login using B/E Aerospace Active Directory. We should not have to maintain seperate authentication details in this application. 
 
 ## Dashboard (Home Page)
-
 The dashboard will act as the application home page and provide top level access to the menus and user specific information.
 The dashboard will be built up from "modules" which can show summary or basic detail information. 
 
 - My Recently Created SWIs
     - Show the last 5 SWIs created by the logged in user
-- My Approval Queue
-    - Show the SWIs which are waiting for the logged in users Approval
-- My Work In Progress
+- My Approval Queue (Approvers Only)
+    - Show the SWIs which are waiting for the logged in users approval
+- My Work In Progress (Authors Only)
     - Show the WIP / draft documents which have been started but not published by the logged in user.
-- My Recently Trashed SWIs
+- My Recently Trashed SWIs (Authors Only)
     - Show the last 5 SWIs trashed by the logged in user 
 
 ## Search
-
 This screen would be the primary screen for searching all SWIs in the system. 
-You will only find the SWIs for which you have the permissions (see Application Securit section).
+You will only find the SWIs for which you have the permissions (see Application Security section).
 
 The following fields can be searched. The search screen criteria would build cumulatively. 
 
@@ -83,6 +81,7 @@ The following fields can be searched. The search screen criteria would build cum
 - Last Modified On (Date Range)
 
 Search results would be displayed in a grid with basic metadata including, Document Title, SWI#, Author, 
-Last Modified By and Created On.
+Last Modified By and Created On. Also there would be a button to open the SWI edit screen and SWI viewer. 
+
 
 
