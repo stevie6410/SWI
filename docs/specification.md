@@ -15,12 +15,12 @@ Previously the iOS application "Inflowchart" was used to createthe documents. Th
 
 # Technology
 ## Server
-- Hosting 
+- **Hosting** 
     - Windows Server 2008 R2
     - IIS 7
-- Database
+- **Database**
     - SQL Server 2008 R2
-- Web Data Service
+- **Web Data Service**
     - ASP.Net Web Api 2
     - REST compliant 
 
@@ -36,13 +36,13 @@ Previously the iOS application "Inflowchart" was used to createthe documents. Th
 # Application Security
 
 The application would have the following roles:
-- Basic User
+- **Basic User**
     - Can read public SWIs and SWIs in their own company
-- Author
+- **Author**
     - Can create SWIs in their own company
-- Approver
+- **Approver**
     - Can approve SWIs in their own company 
-- Manager
+- **Manager**
     - Can manage users permissions within their company
     - Can make SWIs in their own company public to all B/E
 
@@ -57,11 +57,11 @@ The dashboard will be built up from "modules" which can show summary or basic de
 
 - **My Recently Created SWIs**
     - Show the last 5 SWIs created by the logged in user
-- My Approval Queue (Approvers Only)
+- **My Approval Queue (Approvers Only)**
     - Show the SWIs which are waiting for the logged in users approval
-- My Work In Progress (Authors Only)
+- **My Work In Progress (Authors Only)**
     - Show the WIP / draft documents which have been started but not published by the logged in user.
-- My Recently Trashed SWIs (Authors Only)
+- **My Recently Trashed SWIs (Authors Only)**
     - Show the last 5 SWIs trashed by the logged in user 
 
 ## Search
