@@ -34,6 +34,10 @@ Previously the iOS application "Inflowchart" was used to createthe documents. Th
 Login using B/E Aerospace Active Directory. We should not have to maintain seperate authentication details in this application. 
 
 ## Dashboard
+
+The dashboard will act as the application home page and provide top level access to the menus and user specific information.
+The dashboard will be built up from "modules" which can shoe summary or basic detail information. 
+
 - My Recently Created SWIs
     - Show the last 5 work instructions created by the logged in user
 - My Approval Queue
