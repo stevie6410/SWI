@@ -27,7 +27,7 @@ export class SwiSecurityService {
     let options = new RequestOptions({ headers: headers });
 
     this.http.post(url, loginBody, options)
-      .do(console.log)
+     // .do(console.log)
       .map((res) => {
         return res.json();
       })
