@@ -22,6 +22,7 @@ namespace swi_api.Models
             this.ApprovedSWIs = new HashSet<SWIHeader>();
             this.CreatedObservations = new HashSet<SWIObservation>();
             this.ModifiedObservations = new HashSet<SWIObservation>();
+            this.SWISecurityTokens = new HashSet<SWISecurityToken>();
         }
     
         public int Id { get; set; }
@@ -43,5 +44,7 @@ namespace swi_api.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SWIObservation> ModifiedObservations { get; set; }
         public virtual SWIRole SWIRole { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SWISecurityToken> SWISecurityTokens { get; set; }
     }
 }

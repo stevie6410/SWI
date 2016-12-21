@@ -40,5 +40,7 @@ namespace swi_api.Models
         public virtual DbSet<SWITool> SWITools { get; set; }
         public virtual DbSet<SWIUser> SWIUsers { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<SWIClientApp> SWIClientApps { get; set; }
+        public virtual DbSet<SWISecurityToken> SWISecurityTokens { get; set; }
     }
 }

@@ -144,5 +144,33 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SWIClientApps">
+      <EntityTypeMapping TypeName="SWIModel.SWIClientApp">
+        <MappingFragment StoreEntitySet="SWIClientApps">
+          <ScalarProperty Name="MaxTokenLifespan" ColumnName="MaxTokenLifespan" />
+          <ScalarProperty Name="TokenRefreshLimit" ColumnName="TokenRefreshLimit" />
+          <ScalarProperty Name="Timeout" ColumnName="Timeout" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SWISecurityTokens">
+      <EntityTypeMapping TypeName="SWIModel.SWISecurityToken">
+        <MappingFragment StoreEntitySet="SWISecurityTokens">
+          <ScalarProperty Name="RefreshCount" ColumnName="RefreshCount" />
+          <ScalarProperty Name="LoggedOutOn" ColumnName="LoggedOutOn" />
+          <ScalarProperty Name="ClientApp" ColumnName="ClientApp" />
+          <ScalarProperty Name="ExpiresOn" ColumnName="ExpiresOn" />
+          <ScalarProperty Name="Timeout" ColumnName="Timeout" />
+          <ScalarProperty Name="IssuedOn" ColumnName="IssuedOn" />
+          <ScalarProperty Name="HostPC" ColumnName="HostPC" />
+          <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+          <ScalarProperty Name="User" ColumnName="SWIUser" />
+          <ScalarProperty Name="Token" ColumnName="Token" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

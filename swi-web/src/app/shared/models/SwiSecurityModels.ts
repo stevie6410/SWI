@@ -25,3 +25,8 @@ export class SwiCompany{
     ErpName: string;                // e.g. 00250
     Description: string;            // e.g. Leighton Buzzard Aftermarket
 }
+
+export class ClientSecurityToken{
+    token: string;
+    expiresOn: Date;
+}

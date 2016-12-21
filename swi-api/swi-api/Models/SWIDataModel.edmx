@@ -15,6 +15,16 @@
           <Property Name="Image" Type="image" />
           <Property Name="Company" Type="nchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="SWIClientApps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Timeout" Type="int" Nullable="false" />
+          <Property Name="TokenRefreshLimit" Type="int" Nullable="false" />
+          <Property Name="MaxTokenLifespan" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="SWICompanys">
           <Key>
             <PropertyRef Name="Id" />
@@ -83,6 +93,22 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SWISecurityTokens">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Token" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SWIUser" Type="int" Nullable="false" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="HostPC" Type="nvarchar" MaxLength="50" />
+          <Property Name="IssuedOn" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Timeout" Type="int" Nullable="false" />
+          <Property Name="ExpiresOn" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ClientApp" Type="int" Nullable="false" />
+          <Property Name="LoggedOutOn" Type="datetime2" Precision="7" />
+          <Property Name="RefreshCount" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SWIStages">
           <Key>
@@ -267,6 +293,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SWISecurityTokens_SWIClientApps">
+          <End Role="SWIClientApps" Type="Self.SWIClientApps" Multiplicity="1" />
+          <End Role="SWISecurityTokens" Type="Self.SWISecurityTokens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SWIClientApps">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SWISecurityTokens">
+              <PropertyRef Name="ClientApp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SWISecurityTokens_SWIUsers">
+          <End Role="SWIUsers" Type="Self.SWIUsers" Multiplicity="1" />
+          <End Role="SWISecurityTokens" Type="Self.SWISecurityTokens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SWIUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SWISecurityTokens">
+              <PropertyRef Name="SWIUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SWIStages_SWIHeaders">
           <End Role="SWIHeaders" Type="Self.SWIHeaders" Multiplicity="0..1" />
           <End Role="SWIStages" Type="Self.SWIStages" Multiplicity="*" />
@@ -341,6 +391,7 @@
         </Association>
         <EntityContainer Name="SWIModelStoreContainer">
           <EntitySet Name="HSItems" EntityType="Self.HSItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SWIClientApps" EntityType="Self.SWIClientApps" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SWICompanys" EntityType="Self.SWICompanys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SWIHeaders" EntityType="Self.SWIHeaders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SWIHSItems" EntityType="Self.SWIHSItems" Schema="dbo" store:Type="Tables" />
@@ -348,6 +399,7 @@
           <EntitySet Name="SWIPermissions" EntityType="Self.SWIPermissions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SWIRolePermissions" EntityType="Self.SWIRolePermissions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SWIRoles" EntityType="Self.SWIRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SWISecurityTokens" EntityType="Self.SWISecurityTokens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SWIStages" EntityType="Self.SWIStages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SWITags" EntityType="Self.SWITags" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SWITools" EntityType="Self.SWITools" Schema="dbo" store:Type="Tables" />
@@ -396,6 +448,14 @@
           <AssociationSet Name="FK_SWIRolePermissions_SWIRoles" Association="Self.FK_SWIRolePermissions_SWIRoles">
             <End Role="SWIRoles" EntitySet="SWIRoles" />
             <End Role="SWIRolePermissions" EntitySet="SWIRolePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SWISecurityTokens_SWIClientApps" Association="Self.FK_SWISecurityTokens_SWIClientApps">
+            <End Role="SWIClientApps" EntitySet="SWIClientApps" />
+            <End Role="SWISecurityTokens" EntitySet="SWISecurityTokens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SWISecurityTokens_SWIUsers" Association="Self.FK_SWISecurityTokens_SWIUsers">
+            <End Role="SWIUsers" EntitySet="SWIUsers" />
+            <End Role="SWISecurityTokens" EntitySet="SWISecurityTokens" />
           </AssociationSet>
           <AssociationSet Name="FK_SWIStages_SWIHeaders" Association="Self.FK_SWIStages_SWIHeaders">
             <End Role="SWIHeaders" EntitySet="SWIHeaders" />
@@ -581,6 +641,7 @@
           <NavigationProperty Name="CreatedObservations" Relationship="Self.FK_SWIObservations_SWIUsers" FromRole="SWIUsers" ToRole="SWIObservations" />
           <NavigationProperty Name="ModifiedObservations" Relationship="Self.FK_SWIObservations_SWIUsers1" FromRole="SWIUsers" ToRole="SWIObservations" />
           <NavigationProperty Name="SWIRole" Relationship="Self.FK_SWIUsers_SWIRoles" FromRole="SWIUsers" ToRole="SWIRoles" />
+          <NavigationProperty Name="SWISecurityTokens" Relationship="SWIModel.FK_SWISecurityTokens_SWIUsers" FromRole="SWIUser" ToRole="SWISecurityToken" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -864,6 +925,16 @@
             <End Role="SWIHeader" EntitySet="SWIHeaders" />
             <End Role="SWITool" EntitySet="SWITools" />
           </AssociationSet>
+          <EntitySet Name="SWIClientApps" EntityType="SWIModel.SWIClientApp" />
+          <EntitySet Name="SWISecurityTokens" EntityType="SWIModel.SWISecurityToken" />
+          <AssociationSet Name="FK_SWISecurityTokens_SWIClientApps" Association="SWIModel.FK_SWISecurityTokens_SWIClientApps">
+            <End Role="SWIClientApp" EntitySet="SWIClientApps" />
+            <End Role="SWISecurityToken" EntitySet="SWISecurityTokens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SWISecurityTokens_SWIUsers" Association="SWIModel.FK_SWISecurityTokens_SWIUsers">
+            <End Role="SWIUser" EntitySet="SWIUsers" />
+            <End Role="SWISecurityToken" EntitySet="SWISecurityTokens" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_SWITools_SWIHeaders">
           <End Type="SWIModel.SWIHeader" Role="SWIHeader" Multiplicity="0..1" />
@@ -874,6 +945,59 @@
             </Principal>
             <Dependent Role="SWITool">
               <PropertyRef Name="SWI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SWIClientApp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Timeout" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SWISecurityTokens" Relationship="SWIModel.FK_SWISecurityTokens_SWIClientApps" FromRole="SWIClientApp" ToRole="SWISecurityToken" />
+          <Property Name="TokenRefreshLimit" Type="Int32" Nullable="false" />
+          <Property Name="MaxTokenLifespan" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SWISecurityToken">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Token" Type="Guid" Nullable="false" />
+          <Property Name="User" Type="Int32" Nullable="false" />
+          <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HostPC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IssuedOn" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="Timeout" Type="Int32" Nullable="false" />
+          <Property Name="ExpiresOn" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ClientApp" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SWIClientApp" Relationship="SWIModel.FK_SWISecurityTokens_SWIClientApps" FromRole="SWISecurityToken" ToRole="SWIClientApp" />
+          <NavigationProperty Name="SWIUser" Relationship="SWIModel.FK_SWISecurityTokens_SWIUsers" FromRole="SWISecurityToken" ToRole="SWIUser" />
+          <Property Name="LoggedOutOn" Type="DateTime" Precision="7" />
+          <Property Name="RefreshCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_SWISecurityTokens_SWIClientApps">
+          <End Type="SWIModel.SWIClientApp" Role="SWIClientApp" Multiplicity="1" />
+          <End Type="SWIModel.SWISecurityToken" Role="SWISecurityToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SWIClientApp">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SWISecurityToken">
+              <PropertyRef Name="ClientApp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SWISecurityTokens_SWIUsers">
+          <End Type="SWIModel.SWIUser" Role="SWIUser" Multiplicity="1" />
+          <End Type="SWIModel.SWISecurityToken" Role="SWISecurityToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SWIUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SWISecurityToken">
+              <PropertyRef Name="User" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1023,6 +1147,34 @@
               <MappingFragment StoreEntitySet="Tags">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SWIClientApps">
+            <EntityTypeMapping TypeName="SWIModel.SWIClientApp">
+              <MappingFragment StoreEntitySet="SWIClientApps">
+                <ScalarProperty Name="MaxTokenLifespan" ColumnName="MaxTokenLifespan" />
+                <ScalarProperty Name="TokenRefreshLimit" ColumnName="TokenRefreshLimit" />
+                <ScalarProperty Name="Timeout" ColumnName="Timeout" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SWISecurityTokens">
+            <EntityTypeMapping TypeName="SWIModel.SWISecurityToken">
+              <MappingFragment StoreEntitySet="SWISecurityTokens">
+                <ScalarProperty Name="RefreshCount" ColumnName="RefreshCount" />
+                <ScalarProperty Name="LoggedOutOn" ColumnName="LoggedOutOn" />
+                <ScalarProperty Name="ClientApp" ColumnName="ClientApp" />
+                <ScalarProperty Name="ExpiresOn" ColumnName="ExpiresOn" />
+                <ScalarProperty Name="Timeout" ColumnName="Timeout" />
+                <ScalarProperty Name="IssuedOn" ColumnName="IssuedOn" />
+                <ScalarProperty Name="HostPC" ColumnName="HostPC" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="User" ColumnName="SWIUser" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

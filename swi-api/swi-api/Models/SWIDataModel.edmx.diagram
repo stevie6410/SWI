@@ -35,6 +35,10 @@
         <AssociationConnector Association="SWIModel.FK_SWIUsers_SWIRoles" ManuallyRouted="false" />
         <AssociationConnector Association="SWIModel.FK_SWITags_Tags" ManuallyRouted="false" />
         <AssociationConnector Association="SWIModel.FK_SWITools_SWIHeaders" />
+        <EntityTypeShape EntityType="SWIModel.SWIClientApp" Width="2" PointX="10.5" PointY="14.875" />
+        <EntityTypeShape EntityType="SWIModel.SWISecurityToken" Width="2" PointX="10.5" PointY="7.375" />
+        <AssociationConnector Association="SWIModel.FK_SWISecurityTokens_SWIClientApps" />
+        <AssociationConnector Association="SWIModel.FK_SWISecurityTokens_SWIUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
