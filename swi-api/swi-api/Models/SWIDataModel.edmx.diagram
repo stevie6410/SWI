@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="496d778251a5408a817b2a428c532d84" Name="Diagram1">
+        <EntityTypeShape EntityType="SWIModel.HSItem" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SWIModel.SWICompany" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SWIModel.SWIHeader" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SWIModel.SWIHSItem" Width="1.5" PointX="8.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SWIModel.SWIObservation" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SWIModel.SWIPermission" Width="2.375" PointX="6.875" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SWIModel.SWIRolePermission" Width="1.5" PointX="9" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SWIModel.SWIRole" Width="1.5" PointX="3.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SWIModel.SWIStage" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SWIModel.SWITag" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SWIModel.SWITool" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SWIModel.SWIUser" Width="2.25" PointX="5.5" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SWIModel.Tag" Width="1.5" PointX="6" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="SWIModel.FK_SWIHSItems_HSItems" ManuallyRouted="false" />
+        <AssociationConnector Association="SWIModel.FK_SWIHeaders_SWICompanys" ManuallyRouted="false" />
+        <AssociationConnector Association="SWIModel.FK_SWIUsers_SWICompanys" ManuallyRouted="false" />
+        <AssociationConnector Association="SWIModel.FK_SWIHeaders_SWIUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="SWIModel.FK_SWIHeaders_SWIUsers1" ManuallyRouted="false" />
+        <AssociationConnector Association="SWIModel.FK_SWIHeaders_SWIUsers2" ManuallyRouted="false" />
+        <AssociationConnector Association="SWIModel.FK_SWIHSItems_SWIHeaders" ManuallyRouted="false" />
+        <AssociationConnector Association="SWIModel.FK_SWIStages_SWIHeaders" ManuallyRouted="false" />
+        <AssociationConnector Association="SWIModel.FK_SWITags_SWIHeaders" ManuallyRouted="false" />
+        <AssociationConnector Association="SWIModel.FK_SWIObservations_SWIStages" ManuallyRouted="false" />
+        <AssociationConnector Association="SWIModel.FK_SWIObservations_SWIUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="SWIModel.FK_SWIObservations_SWIUsers1" ManuallyRouted="false" />
+        <AssociationConnector Association="SWIModel.FK_SWIRolePermissions_SWIPermissions" ManuallyRouted="false" />
+        <AssociationConnector Association="SWIModel.FK_SWIRolePermissions_SWIRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="SWIModel.FK_SWIUsers_SWIRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="SWIModel.FK_SWITags_Tags" ManuallyRouted="false" />
+        <AssociationConnector Association="SWIModel.FK_SWITools_SWIHeaders" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

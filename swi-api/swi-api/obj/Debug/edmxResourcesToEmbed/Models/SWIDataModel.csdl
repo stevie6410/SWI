@@ -1,0 +1,454 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SWIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="HSItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PrintMessage" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Company" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="SWIHSItems" Relationship="Self.FK_SWIHSItems_HSItems" FromRole="HSItems" ToRole="SWIHSItems" />
+  </EntityType>
+  <EntityType Name="SWICompany">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ErpName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="SWIHeaders" Relationship="Self.FK_SWIHeaders_SWICompanys" FromRole="SWICompanys" ToRole="SWIHeaders" />
+    <NavigationProperty Name="SWIUsers" Relationship="Self.FK_SWIUsers_SWICompanys" FromRole="SWICompanys" ToRole="SWIUsers" />
+  </EntityType>
+  <EntityType Name="SWIHeader">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Sequence" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Revision" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Released" Type="Boolean" Nullable="false" />
+    <Property Name="Author" Type="Int32" Nullable="false" />
+    <Property Name="Expert" Type="Int32" />
+    <Property Name="Approver" Type="Int32" />
+    <Property Name="Company" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SWICompany" Relationship="Self.FK_SWIHeaders_SWICompanys" FromRole="SWIHeaders" ToRole="SWICompanys" />
+    <NavigationProperty Name="SWIAuthor" Relationship="Self.FK_SWIHeaders_SWIUsers" FromRole="SWIHeaders" ToRole="SWIUsers" />
+    <NavigationProperty Name="SWIExpert" Relationship="Self.FK_SWIHeaders_SWIUsers1" FromRole="SWIHeaders" ToRole="SWIUsers" />
+    <NavigationProperty Name="SWIApprover" Relationship="Self.FK_SWIHeaders_SWIUsers2" FromRole="SWIHeaders" ToRole="SWIUsers" />
+    <NavigationProperty Name="SWIHSItems" Relationship="Self.FK_SWIHSItems_SWIHeaders" FromRole="SWIHeaders" ToRole="SWIHSItems" />
+    <NavigationProperty Name="SWIStages" Relationship="Self.FK_SWIStages_SWIHeaders" FromRole="SWIHeaders" ToRole="SWIStages" />
+    <NavigationProperty Name="SWITags" Relationship="Self.FK_SWITags_SWIHeaders" FromRole="SWIHeaders" ToRole="SWITags" />
+    <NavigationProperty Name="SWITools" Relationship="SWIModel.FK_SWITools_SWIHeaders" FromRole="SWIHeader" ToRole="SWITool" />
+  </EntityType>
+  <EntityType Name="SWIHSItem">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HSItem" Type="Int32" Nullable="false" />
+    <Property Name="SWI" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="HSItem1" Relationship="Self.FK_SWIHSItems_HSItems" FromRole="SWIHSItems" ToRole="HSItems" />
+    <NavigationProperty Name="SWIHeader" Relationship="Self.FK_SWIHSItems_SWIHeaders" FromRole="SWIHSItems" ToRole="SWIHeaders" />
+  </EntityType>
+  <EntityType Name="SWIObservation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Stage" Type="Int32" Nullable="false" />
+    <Property Name="Text" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="JobNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="SWIStage" Relationship="Self.FK_SWIObservations_SWIStages" FromRole="SWIObservations" ToRole="SWIStages" />
+    <NavigationProperty Name="ObservationCreatedBy" Relationship="Self.FK_SWIObservations_SWIUsers" FromRole="SWIObservations" ToRole="SWIUsers" />
+    <NavigationProperty Name="ObservationModifiedBy" Relationship="Self.FK_SWIObservations_SWIUsers1" FromRole="SWIObservations" ToRole="SWIUsers" />
+  </EntityType>
+  <EntityType Name="SWIPermission">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SWIRolePermissions" Relationship="Self.FK_SWIRolePermissions_SWIPermissions" FromRole="SWIPermissions" ToRole="SWIRolePermissions" />
+  </EntityType>
+  <EntityType Name="SWIRolePermission">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role" Type="Int32" Nullable="false" />
+    <Property Name="Permission" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SWIPermission" Relationship="Self.FK_SWIRolePermissions_SWIPermissions" FromRole="SWIRolePermissions" ToRole="SWIPermissions" />
+    <NavigationProperty Name="SWIRole" Relationship="Self.FK_SWIRolePermissions_SWIRoles" FromRole="SWIRolePermissions" ToRole="SWIRoles" />
+  </EntityType>
+  <EntityType Name="SWIRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SWIRolePermissions" Relationship="Self.FK_SWIRolePermissions_SWIRoles" FromRole="SWIRoles" ToRole="SWIRolePermissions" />
+    <NavigationProperty Name="SWIUsers" Relationship="Self.FK_SWIUsers_SWIRoles" FromRole="SWIRoles" ToRole="SWIUsers" />
+  </EntityType>
+  <EntityType Name="SWIStage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Sequence" Type="Int32" Nullable="false" />
+    <Property Name="Text" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="ImageCaption" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="CriticalStep" Type="Boolean" Nullable="false" />
+    <Property Name="CarePoint" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Hyperlink" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="RelatedSwi" Type="Int32" />
+    <Property Name="SWI" Type="Int32" />
+    <NavigationProperty Name="SWIHeader" Relationship="Self.FK_SWIStages_SWIHeaders" FromRole="SWIStages" ToRole="SWIHeaders" />
+    <NavigationProperty Name="SWIObservations" Relationship="Self.FK_SWIObservations_SWIStages" FromRole="SWIStages" ToRole="SWIObservations" />
+  </EntityType>
+  <EntityType Name="SWITag">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tag" Type="Int32" Nullable="false" />
+    <Property Name="SWI" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SWIHeader" Relationship="Self.FK_SWITags_SWIHeaders" FromRole="SWITags" ToRole="SWIHeaders" />
+    <NavigationProperty Name="Tag1" Relationship="Self.FK_SWITags_Tags" FromRole="SWITags" ToRole="Tags" />
+  </EntityType>
+  <EntityType Name="SWITool">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Caption" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="SWI" Type="Int32" />
+    <NavigationProperty Name="SWIHeader" Relationship="SWIModel.FK_SWITools_SWIHeaders" FromRole="SWITool" ToRole="SWIHeader" />
+  </EntityType>
+  <EntityType Name="SWIUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DefaultCompany" Type="Int32" Nullable="false" />
+    <Property Name="Role" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="UserDefaultCompany" Relationship="Self.FK_SWIUsers_SWICompanys" FromRole="SWIUsers" ToRole="SWICompanys" />
+    <NavigationProperty Name="AuthoredSWIs" Relationship="Self.FK_SWIHeaders_SWIUsers" FromRole="SWIUsers" ToRole="SWIHeaders" />
+    <NavigationProperty Name="ExpertSWIs" Relationship="Self.FK_SWIHeaders_SWIUsers1" FromRole="SWIUsers" ToRole="SWIHeaders" />
+    <NavigationProperty Name="ApprovedSWIs" Relationship="Self.FK_SWIHeaders_SWIUsers2" FromRole="SWIUsers" ToRole="SWIHeaders" />
+    <NavigationProperty Name="CreatedObservations" Relationship="Self.FK_SWIObservations_SWIUsers" FromRole="SWIUsers" ToRole="SWIObservations" />
+    <NavigationProperty Name="ModifiedObservations" Relationship="Self.FK_SWIObservations_SWIUsers1" FromRole="SWIUsers" ToRole="SWIObservations" />
+    <NavigationProperty Name="SWIRole" Relationship="Self.FK_SWIUsers_SWIRoles" FromRole="SWIUsers" ToRole="SWIRoles" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="SWITags" Relationship="Self.FK_SWITags_Tags" FromRole="Tags" ToRole="SWITags" />
+  </EntityType>
+  <Association Name="FK_SWIHSItems_HSItems">
+    <End Role="HSItems" Type="Self.HSItem" Multiplicity="1" />
+    <End Role="SWIHSItems" Type="Self.SWIHSItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HSItems">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWIHSItems">
+        <PropertyRef Name="HSItem" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SWIHeaders_SWICompanys">
+    <End Role="SWICompanys" Type="Self.SWICompany" Multiplicity="1" />
+    <End Role="SWIHeaders" Type="Self.SWIHeader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SWICompanys">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWIHeaders">
+        <PropertyRef Name="Company" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SWIUsers_SWICompanys">
+    <End Role="SWICompanys" Type="Self.SWICompany" Multiplicity="1" />
+    <End Role="SWIUsers" Type="Self.SWIUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SWICompanys">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWIUsers">
+        <PropertyRef Name="DefaultCompany" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SWIHeaders_SWIUsers">
+    <End Role="SWIUsers" Type="Self.SWIUser" Multiplicity="1" />
+    <End Role="SWIHeaders" Type="Self.SWIHeader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SWIUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWIHeaders">
+        <PropertyRef Name="Author" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SWIHeaders_SWIUsers1">
+    <End Role="SWIUsers" Type="Self.SWIUser" Multiplicity="0..1" />
+    <End Role="SWIHeaders" Type="Self.SWIHeader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SWIUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWIHeaders">
+        <PropertyRef Name="Expert" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SWIHeaders_SWIUsers2">
+    <End Role="SWIUsers" Type="Self.SWIUser" Multiplicity="0..1" />
+    <End Role="SWIHeaders" Type="Self.SWIHeader" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SWIUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWIHeaders">
+        <PropertyRef Name="Approver" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SWIHSItems_SWIHeaders">
+    <End Role="SWIHeaders" Type="Self.SWIHeader" Multiplicity="1" />
+    <End Role="SWIHSItems" Type="Self.SWIHSItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SWIHeaders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWIHSItems">
+        <PropertyRef Name="SWI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SWIStages_SWIHeaders">
+    <End Role="SWIHeaders" Type="Self.SWIHeader" Multiplicity="0..1" />
+    <End Role="SWIStages" Type="Self.SWIStage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SWIHeaders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWIStages">
+        <PropertyRef Name="SWI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SWITags_SWIHeaders">
+    <End Role="SWIHeaders" Type="Self.SWIHeader" Multiplicity="1" />
+    <End Role="SWITags" Type="Self.SWITag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SWIHeaders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWITags">
+        <PropertyRef Name="SWI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SWIObservations_SWIStages">
+    <End Role="SWIStages" Type="Self.SWIStage" Multiplicity="1" />
+    <End Role="SWIObservations" Type="Self.SWIObservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SWIStages">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWIObservations">
+        <PropertyRef Name="Stage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SWIObservations_SWIUsers">
+    <End Role="SWIUsers" Type="Self.SWIUser" Multiplicity="0..1" />
+    <End Role="SWIObservations" Type="Self.SWIObservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SWIUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWIObservations">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SWIObservations_SWIUsers1">
+    <End Role="SWIUsers" Type="Self.SWIUser" Multiplicity="0..1" />
+    <End Role="SWIObservations" Type="Self.SWIObservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SWIUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWIObservations">
+        <PropertyRef Name="ModifiedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SWIRolePermissions_SWIPermissions">
+    <End Role="SWIPermissions" Type="Self.SWIPermission" Multiplicity="1" />
+    <End Role="SWIRolePermissions" Type="Self.SWIRolePermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SWIPermissions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWIRolePermissions">
+        <PropertyRef Name="Permission" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SWIRolePermissions_SWIRoles">
+    <End Role="SWIRoles" Type="Self.SWIRole" Multiplicity="1" />
+    <End Role="SWIRolePermissions" Type="Self.SWIRolePermission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SWIRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWIRolePermissions">
+        <PropertyRef Name="Role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SWIUsers_SWIRoles">
+    <End Role="SWIRoles" Type="Self.SWIRole" Multiplicity="1" />
+    <End Role="SWIUsers" Type="Self.SWIUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SWIRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWIUsers">
+        <PropertyRef Name="Role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SWITags_Tags">
+    <End Role="Tags" Type="Self.Tag" Multiplicity="1" />
+    <End Role="SWITags" Type="Self.SWITag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tags">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWITags">
+        <PropertyRef Name="Tag" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SWIDB" annotation:LazyLoadingEnabled="false">
+    <EntitySet Name="HSItems" EntityType="Self.HSItem" />
+    <EntitySet Name="SWICompanys" EntityType="Self.SWICompany" />
+    <EntitySet Name="SWIHeaders" EntityType="Self.SWIHeader" />
+    <EntitySet Name="SWIHSItems" EntityType="Self.SWIHSItem" />
+    <EntitySet Name="SWIObservations" EntityType="Self.SWIObservation" />
+    <EntitySet Name="SWIPermissions" EntityType="Self.SWIPermission" />
+    <EntitySet Name="SWIRolePermissions" EntityType="Self.SWIRolePermission" />
+    <EntitySet Name="SWIRoles" EntityType="Self.SWIRole" />
+    <EntitySet Name="SWIStages" EntityType="Self.SWIStage" />
+    <EntitySet Name="SWITags" EntityType="Self.SWITag" />
+    <EntitySet Name="SWITools" EntityType="Self.SWITool" />
+    <EntitySet Name="SWIUsers" EntityType="Self.SWIUser" />
+    <EntitySet Name="Tags" EntityType="Self.Tag" />
+    <AssociationSet Name="FK_SWIHSItems_HSItems" Association="Self.FK_SWIHSItems_HSItems">
+      <End Role="HSItems" EntitySet="HSItems" />
+      <End Role="SWIHSItems" EntitySet="SWIHSItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SWIHeaders_SWICompanys" Association="Self.FK_SWIHeaders_SWICompanys">
+      <End Role="SWICompanys" EntitySet="SWICompanys" />
+      <End Role="SWIHeaders" EntitySet="SWIHeaders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SWIUsers_SWICompanys" Association="Self.FK_SWIUsers_SWICompanys">
+      <End Role="SWICompanys" EntitySet="SWICompanys" />
+      <End Role="SWIUsers" EntitySet="SWIUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SWIHeaders_SWIUsers" Association="Self.FK_SWIHeaders_SWIUsers">
+      <End Role="SWIUsers" EntitySet="SWIUsers" />
+      <End Role="SWIHeaders" EntitySet="SWIHeaders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SWIHeaders_SWIUsers1" Association="Self.FK_SWIHeaders_SWIUsers1">
+      <End Role="SWIUsers" EntitySet="SWIUsers" />
+      <End Role="SWIHeaders" EntitySet="SWIHeaders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SWIHeaders_SWIUsers2" Association="Self.FK_SWIHeaders_SWIUsers2">
+      <End Role="SWIUsers" EntitySet="SWIUsers" />
+      <End Role="SWIHeaders" EntitySet="SWIHeaders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SWIHSItems_SWIHeaders" Association="Self.FK_SWIHSItems_SWIHeaders">
+      <End Role="SWIHeaders" EntitySet="SWIHeaders" />
+      <End Role="SWIHSItems" EntitySet="SWIHSItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SWIStages_SWIHeaders" Association="Self.FK_SWIStages_SWIHeaders">
+      <End Role="SWIHeaders" EntitySet="SWIHeaders" />
+      <End Role="SWIStages" EntitySet="SWIStages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SWITags_SWIHeaders" Association="Self.FK_SWITags_SWIHeaders">
+      <End Role="SWIHeaders" EntitySet="SWIHeaders" />
+      <End Role="SWITags" EntitySet="SWITags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SWIObservations_SWIStages" Association="Self.FK_SWIObservations_SWIStages">
+      <End Role="SWIStages" EntitySet="SWIStages" />
+      <End Role="SWIObservations" EntitySet="SWIObservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SWIObservations_SWIUsers" Association="Self.FK_SWIObservations_SWIUsers">
+      <End Role="SWIUsers" EntitySet="SWIUsers" />
+      <End Role="SWIObservations" EntitySet="SWIObservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SWIObservations_SWIUsers1" Association="Self.FK_SWIObservations_SWIUsers1">
+      <End Role="SWIUsers" EntitySet="SWIUsers" />
+      <End Role="SWIObservations" EntitySet="SWIObservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SWIRolePermissions_SWIPermissions" Association="Self.FK_SWIRolePermissions_SWIPermissions">
+      <End Role="SWIPermissions" EntitySet="SWIPermissions" />
+      <End Role="SWIRolePermissions" EntitySet="SWIRolePermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SWIRolePermissions_SWIRoles" Association="Self.FK_SWIRolePermissions_SWIRoles">
+      <End Role="SWIRoles" EntitySet="SWIRoles" />
+      <End Role="SWIRolePermissions" EntitySet="SWIRolePermissions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SWIUsers_SWIRoles" Association="Self.FK_SWIUsers_SWIRoles">
+      <End Role="SWIRoles" EntitySet="SWIRoles" />
+      <End Role="SWIUsers" EntitySet="SWIUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SWITags_Tags" Association="Self.FK_SWITags_Tags">
+      <End Role="Tags" EntitySet="Tags" />
+      <End Role="SWITags" EntitySet="SWITags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SWITools_SWIHeaders" Association="SWIModel.FK_SWITools_SWIHeaders">
+      <End Role="SWIHeader" EntitySet="SWIHeaders" />
+      <End Role="SWITool" EntitySet="SWITools" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_SWITools_SWIHeaders">
+    <End Type="SWIModel.SWIHeader" Role="SWIHeader" Multiplicity="0..1" />
+    <End Type="SWIModel.SWITool" Role="SWITool" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SWIHeader">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SWITool">
+        <PropertyRef Name="SWI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
