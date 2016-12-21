@@ -1,0 +1,18 @@
+{
+  "name": "swi-webapp",
+  "version": "0.0.1",
+  "description": "Standard work instruction app for B/E Aerospace",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.beav.com/SAOSystems/SWI.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

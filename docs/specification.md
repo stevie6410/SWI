@@ -1,9 +1,10 @@
-# Work Instruction App Specification
+# Functional Specification
+## Standard Work Instruction App 
 
 B/E Aerospace require a replacment application for creating standard work instructions on mobile devices. 
-Previously the iOS application "Inflowchart" was used to createthe documents. The generated files in both .pdf
- .inflowchart and .pages format are uploaded to a WebDAV server which has a WI App search web application over the top.
- This enables the uses with permmisions to search the repository in a basic fassion.
+Previously the iOS application "Inflowchart" was used to create the documents. The generated files in .pdf
+ .inflowchart and .pages format are uploaded to a WebDAV server which has a WI App search web application running on top.
+ This enables the users with permmisions to search the repository with limited functionality.
 
  Due to the discontinuation of Inflowchart and its lack of support in recent iOS vesions, a new cross platform, 
  mobile ready application is required.
@@ -11,7 +12,6 @@ Previously the iOS application "Inflowchart" was used to createthe documents. Th
 # Acronyms
 
 - SWI = Standard Work Instruction 
-
 
 # Technology
 ## Server
@@ -50,6 +50,7 @@ The application would have the following roles:
 
 ## Login 
 Login using B/E Aerospace Active Directory. We should not have to maintain seperate authentication details in this application. 
+However we may need to store user profile data regarding permissions and defaults.
 
 ## Dashboard (Home Page)
 The dashboard will act as the application home page and provide top level access to the menus and user specific information.
@@ -84,7 +85,7 @@ Search results would be displayed in a grid with basic metadata including, Docum
 Last Modified By and Created On. Also there would be a button to open the SWI edit screen and SWI viewer. 
 
 ## Create / Edit SWI
-This screen would is used soley for the creation and modification of the SWIs. It is not intended as the display view. 
+This screen is used soley for the creation and modification of the SWIs. It is not intended as the display view. 
 This structure means that we can have more control over the display of the SWIs and also simplify the data entry and validation. 
 
 The SWI document is broken into the following sections:
@@ -107,3 +108,15 @@ The SWI document is broken into the following sections:
     - Option of different layouts. e.g. (Large image & caption), (Small image & caption & care point), (Text only)
     - Dynamic layout, where stages take up the available space on the users device
 
+## SWI Viewer
+This screen would be used for read only viewing of the SWI. Because the 'SWI Viewer' screen is seperate to the create and edit screens, 
+we are able to customise the design for an enhanced user expereince. In previous versions of the application, the 
+goal was to produce a PDF document. With the new app, we can focus on paperless documentation with an interactive viewing experience. 
+
+- **Possible Features**
+    - Step by step scrolling
+    - Dynamic flow layout
+    - Image zoom
+    - Production time notes
+    - Error reporting
+    - Usage tracking
