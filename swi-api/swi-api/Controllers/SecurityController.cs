@@ -38,7 +38,7 @@ namespace swi_api.Controllers
 
             //Check that the user exists in the app database
             var user = ValidateAppUser(request.username);
-            if(user == null)
+            if (user == null)
             {
                 return BadRequest("User does not exist in the SWI Users database. Please contact your local administrator");
             }
@@ -55,7 +55,7 @@ namespace swi_api.Controllers
             if (existingToken != null)
             {
                 //Refresh the token and send back to the client
-                return RefreshToken(new SecurityTokenRequest() { token = existingToken.Token});
+                return RefreshToken(new SecurityTokenRequest() { token = existingToken.Token });
             }
 
             //Generate a new security token
@@ -79,10 +79,10 @@ namespace swi_api.Controllers
         public IHttpActionResult Logout([FromBody] SecurityTokenRequest request)
         {
             var token = GetSecurityToken(request.token);
-            if(token != null)
+            if (token != null)
             {
                 token.LoggedOutOn = DateTime.Now;
-                db.SaveChanges(); 
+                db.SaveChanges();
             }
             return Ok();
         }
@@ -94,7 +94,7 @@ namespace swi_api.Controllers
         {
             //Get the security token from the database
             var securityToken = GetSecurityToken(request.token);
-            if(securityToken == null)
+            if (securityToken == null)
             {
                 return BadRequest("Could not find security token");
             }
@@ -116,15 +116,37 @@ namespace swi_api.Controllers
 
         }
 
+        [HttpPost]
+        [Route("api/security/validatetoken")]
+        [ResponseType(typeof(bool))]
+        public IHttpActionResult ValidateToken([FromBody] SecurityTokenRequest request)
+        {
+
+            if(request.token == null)
+            {
+                return BadRequest("No token was provided");
+            }
+
+            var securityToken = GetSecurityToken(request.token);
+            if (securityToken != null && !securityToken.IsExpired())
+            {
+                return StatusCode(HttpStatusCode.Accepted);
+            }
+            else
+            {
+                return StatusCode(HttpStatusCode.NotAcceptable);
+            }
+        }
+
         private SWISecurityToken GetExistingToken(string username)
         {
             var token = db.SWISecurityTokens.Where(x => x.SWIUser.Username == username && x.LoggedOutOn == null).OrderByDescending(x => x.ExpiresOn).FirstOrDefault();
-            if(token == null)
+            if (token == null)
             {
                 return null;
             }
             var expireCompare = DateTime.Compare(token.ExpiresOn, DateTime.Now);
-            if(expireCompare > 0)
+            if (expireCompare > 0)
             {
                 return token;
             }
@@ -146,9 +168,9 @@ namespace swi_api.Controllers
             return db.SWIClientApps.Where(x => x.Name == clientName).FirstOrDefault();
         }
 
-        private bool ValidateDomainCredentials(string username,string password)
+        private bool ValidateDomainCredentials(string username, string password)
         {
-            using(PrincipalContext pc = new PrincipalContext(ContextType.Domain, "BEAV"))
+            using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, "BEAV"))
             {
                 //validate the credentials
                 bool isValid = pc.ValidateCredentials(username, password);
@@ -156,6 +178,6 @@ namespace swi_api.Controllers
             }
         }
 
-        
+
     }
 }

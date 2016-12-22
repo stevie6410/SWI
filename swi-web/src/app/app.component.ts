@@ -25,13 +25,25 @@ export class AppComponent {
   refreshToken() {
     this.securityService.refreshToken()
       .subscribe(
-      (data) => { console.log("logged in", data); },
-      (err) => { console.log("error logging in", err) }
+      (data: boolean) => { console.log("refreshed token", data); },
+      (err) => { console.log("error refreshing token", err) }
       );
   }
 
   logout() {
+    this.securityService.logout()
+      .subscribe(
+      (data: boolean) => { console.log("logged out", data); },
+      (err) => { console.log("error logging out", err) }
+      );
+  }
 
+  validateSession() {
+    this.securityService.isSessionValid()
+      .subscribe(
+      (data: boolean) => { console.log("Session Valid", data); },
+      err => { console.log("Error while checking session"); }
+      );
   }
 
 }

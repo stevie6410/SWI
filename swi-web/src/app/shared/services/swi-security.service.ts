@@ -27,12 +27,11 @@ export class SwiSecurityService {
     let options = new RequestOptions({ headers: headers });
 
     this.http.post(url, loginBody, options)
-     // .do(console.log)
       .map((res) => {
         return res.json();
       })
       .subscribe(
-      (data) => {
+      (data: ClientSecurityToken) => {
         this.updateStoredToken(data);
         subject.next(true);
         subject.complete();
@@ -45,7 +44,7 @@ export class SwiSecurityService {
     return subject.asObservable();
   }
 
-  public refreshToken(): Observable<boolean>{
+  public refreshToken(): Observable<boolean> {
     let subject: Subject<boolean> = new Subject<boolean>();
     let currentToken = localStorage.getItem("token");
     let url: string = this.baseUrl + 'refreshtoken';
@@ -75,9 +74,67 @@ export class SwiSecurityService {
     return subject.asObservable();
   }
 
+  public logout(): Observable<boolean> {
+    let subject: Subject<boolean> = new Subject<boolean>();
+    let currentToken = localStorage.getItem("token");
+    if (!currentToken) {
+      subject.next(false);
+      subject.complete();
+    } else {
+      let url: string = this.baseUrl + 'logout';
+      let refreshBody = { token: currentToken };
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      this.http.post(url, refreshBody, options)
+        .subscribe(
+        data => {
+          subject.next(true);
+          subject.complete();
+        },
+        err => {
+          subject.error(err);
+        }
+        );
+    }
+    localStorage.removeItem("token");
+    localStorage.removeItem("expiresOn");
+    return subject;
+  }
+
+  public isSessionValid(): Observable<boolean> {
+    let subject: Subject<boolean> = new Subject<boolean>();
+    let currentToken = localStorage.getItem("token");
+    let url: string = this.baseUrl + 'validatetoken';
+    let refreshBody = { token: currentToken };
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    this.http.post(url, refreshBody, options)
+      .subscribe(
+      data => {
+        if (data.status == 202) {
+          subject.next(true);
+          subject.complete();
+        } else {
+          subject.next(false);
+          subject.complete();
+        }
+      },
+      err => {
+        if (err.status == 400) {
+          subject.next(false);
+          subject.complete();
+        }
+        else if (err.status == 406) {
+          subject.next(false);
+          subject.complete();
+        }
+      }
+      );
+    return subject.asObservable();
+  }
+
   private updateStoredToken(token: ClientSecurityToken) {
     localStorage.setItem("token", token.token);
     localStorage.setItem("expiresOn", token.expiresOn.toString());
   }
-
 }
