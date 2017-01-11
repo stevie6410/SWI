@@ -1,0 +1,76 @@
+<div *ngIf="swi">
+  <!--Actions Panel-->
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Actions</h3>
+    </div>
+    <div class="panel-body">
+
+      <button type="button" class="btn btn-sm btn-success">Create New Revision</button>
+      <button type="button" class="btn btn-sm btn-success">Approve</button>
+      <button type="button" class="btn btn-sm btn-success">Make Public</button>
+
+    </div>
+  </div>
+
+  <!--Header Panel-->
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Standard Work Instruction</h3>
+    </div>
+    <div class="panel-body">
+
+      <form *ngIf="swi" class="form-horizontal" [formGroup]="headerForm" autocomplete="off" novalidate #hForm>
+
+        <form-text [label]="'Title'" formControlName="title" [control]="headerForm.controls['title']"></form-text>
+        <form-text [label]="'Revision'" formControlName="revision" [control]="headerForm.controls['revision']"></form-text>
+        <form-text [label]="'Is Released'" formControlName="isReleased" [control]="headerForm.controls['isReleased']"></form-text>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!--Stages Panel-->
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title"> <span class="badge">{{swi.swiStages.length}}</span> Stages</h3>
+    </div>
+    <ul class="list-group">
+      <li *ngFor="let stage of swi.swiStages" class="list-group-item">
+        <div>
+          <span class="badge">{{stage.sequence}}</span>
+          <span>{{stage.text}}</span>
+          <span class="danger">{{stage.isCriticalStep}}</span>
+
+          <div class="btn-group btn-group-sm pull-right">
+            <button type="button" class="btn btn-danger">Edit Stage</button>
+            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+            <ul class="dropdown-menu">
+              <li><a href="#">Move Up</a></li>
+              <li><a href="#">Move Down</a></li>
+              <li><a href="#">Flag Critical Step</a></li>
+              <li role="separator" class="divider"></li>
+              <li (click)="removeStage(stage)"><a href="#">Delete Stage</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </li>
+    </ul>
+    <div class="panel-body">
+      <button type="button" class="btn btn-sm btn-success" (click)="addStageModal.open()">Add Stage</button>
+      <button type="button" class="btn btn-sm btn-success" (click)="reorderList()">Reorder</button>
+    </div>
+  </div>
+
+  <swi-builder-edit-stage #stageEditModal></swi-builder-edit-stage>
+
+  <pre>
+	  {{ headerForm.value | json}}
+  </pre>
+
+</div>

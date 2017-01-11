@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { SwiBuilderStagesComponent } from './swi-builder-stages.component';
+import { FormTextComponent } from './form-text.component';
 
-describe('SwiBuilderStagesComponent', () => {
-  let component: SwiBuilderStagesComponent;
-  let fixture: ComponentFixture<SwiBuilderStagesComponent>;
+describe('FormTextComponent', () => {
+  let component: FormTextComponent;
+  let fixture: ComponentFixture<FormTextComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SwiBuilderStagesComponent ]
+      declarations: [ FormTextComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SwiBuilderStagesComponent);
+    fixture = TestBed.createComponent(FormTextComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

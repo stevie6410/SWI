@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { SwiBuilderToolingComponent } from './swi-builder-tooling.component';
+import { TopbarComponent } from './topbar.component';
 
-describe('SwiBuilderToolingComponent', () => {
-  let component: SwiBuilderToolingComponent;
-  let fixture: ComponentFixture<SwiBuilderToolingComponent>;
+describe('TopbarComponent', () => {
+  let component: TopbarComponent;
+  let fixture: ComponentFixture<TopbarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SwiBuilderToolingComponent ]
+      declarations: [ TopbarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SwiBuilderToolingComponent);
+    fixture = TestBed.createComponent(TopbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

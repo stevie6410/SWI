@@ -1,23 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
+
+import { SharedControlsModule } from '../../shared/controls/shared-controls.module';
 
 import { SwiBuilderScreenComponent } from './swi-builder-screen/swi-builder-screen.component';
-import { SwiBuilderHeaderComponent } from './swi-builder-header/swi-builder-header.component';
-import { SwiBuilderHSPickerComponent } from './swi-builder-hspicker/swi-builder-hspicker.component';
-import { SwiBuilderToolingComponent } from './swi-builder-tooling/swi-builder-tooling.component';
-import { SwiBuilderStagesComponent } from './swi-builder-stages/swi-builder-stages.component';
 import { SwiBuilderService } from '../../shared/services/swi-builder.service';
+import { SwiBuilderFormComponent } from './swi-builder-form/swi-builder-form.component';
+import { SwiBuilderEditStageComponent } from './swi-builder-edit-stage/swi-builder-edit-stage.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    SharedControlsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    Ng2Bs3ModalModule
   ],
   declarations: [
     SwiBuilderScreenComponent,
-    SwiBuilderHeaderComponent,
-    SwiBuilderHSPickerComponent,
-    SwiBuilderToolingComponent,
-    SwiBuilderStagesComponent
+    SwiBuilderFormComponent,
+    SwiBuilderEditStageComponent
   ],
   exports: [
     SwiBuilderScreenComponent

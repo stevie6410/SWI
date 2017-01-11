@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { SwiBuilderHspickerComponent } from './swi-builder-hspicker.component';
+import { SwiBuilderEditStageComponent } from './swi-builder-edit-stage.component';
 
-describe('SwiBuilderHspickerComponent', () => {
-  let component: SwiBuilderHspickerComponent;
-  let fixture: ComponentFixture<SwiBuilderHspickerComponent>;
+describe('SwiBuilderEditStageComponent', () => {
+  let component: SwiBuilderEditStageComponent;
+  let fixture: ComponentFixture<SwiBuilderEditStageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SwiBuilderHspickerComponent ]
+      declarations: [ SwiBuilderEditStageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SwiBuilderHspickerComponent);
+    fixture = TestBed.createComponent(SwiBuilderEditStageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

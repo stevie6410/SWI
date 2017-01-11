@@ -1,19 +1,19 @@
 import { SwiUser, SwiCompany } from './SwiSecurityModels';
 
 export class SwiHeader {
-    Id: number;
-    Sequence: number;
-    Title: string;
-    Revision: string;
-    Released: boolean;
-    Author: SwiUser;
-    Expert: SwiUser;
-    Approver: SwiUser;
-    Company: SwiCompany;
-    HSItems: SwiHSItem[];
-    Tools: SwiTool[];
-    Stages: SwiStage[];
-    Tags: SwiTag[];
+    id: number;
+    sequence: number;
+    title: string;
+    revision: string;
+    released: boolean;
+    author: SwiUser;
+    expert: SwiUser;
+    approver: SwiUser;
+    company: SwiCompany;
+    swihsItems: SwiHSItem[];
+    swiTools: SwiTool[];
+    swiStages: SwiStage[];
+    swiTags: SwiTag[];
 }
 
 export class SwiHSItem {
@@ -32,16 +32,16 @@ export class SwiTool {
 }
 
 export class SwiStage {
-    Id: number;
-    Sequence: number;
-    Text: string;
-    ImageCaption: string;
-    Image: any;
-    CriticalStep: boolean;
-    CarePoint: string;
-    Hyperlink: string;
-    RelatedSwi: SwiHeader;
-    Observations: SwiObservation[];
+    id: number;
+    sequence: number;
+    text: string;
+    imageCaption: string;
+    image: any;
+    criticalStep: boolean;
+    carePoint: string;
+    hyperlink: string;
+    relatedSwi: SwiHeader;
+    observations: SwiObservation[];
 }
 
 export class SwiObservation {

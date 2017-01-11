@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Request, Response, RequestOptions, Headers } from '@angular/http';
-
 import { Observable, Subject } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
 
 import { ClientSecurityToken } from '../models/SwiSecurityModels';
 
 @Injectable()
 export class SwiSecurityService {
-
   private baseUrl: string = "http://localhost:4001/api/security/";
 
   constructor(private http: Http) { }

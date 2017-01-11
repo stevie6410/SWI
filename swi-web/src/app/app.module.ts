@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { SwiSecurityService } from './shared/services/swi-security.service';
+import { SwiBuilderModule } from './modules/swi-builder/swi-builder.module';
+import { NavModule } from './modules/nav/nav.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { SwiSecurityService } from './shared/services/swi-security.service';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    SwiBuilderModule,
+    NavModule
   ],
   providers: [
     SwiSecurityService
