@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { SwiSecurityService } from './shared/services/swi-security.service';
 import { SwiBuilderModule } from './modules/swi-builder/swi-builder.module';
 import { NavModule } from './modules/nav/nav.module';
+import { SWIService } from './shared/services/swi.service';
+import { OfflineService } from './shared/services/offline.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { NavModule } from './modules/nav/nav.module';
     NavModule
   ],
   providers: [
-    SwiSecurityService
+    SwiSecurityService,
+    SWIService,
+    OfflineService
   ],
   bootstrap: [AppComponent]
 })

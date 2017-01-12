@@ -46,6 +46,4 @@ export class TopbarComponent implements OnInit {
       err => { console.log("Error while checking session"); }
       );
   }
-
-
 }

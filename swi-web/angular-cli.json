@@ -18,8 +18,7 @@
       "prefix": "",
       "mobile": false,
       "styles": [
-        "styles.css",
-        "../node_modules/bootswatch/paper/bootstrap.css"
+        "styles.scss"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",

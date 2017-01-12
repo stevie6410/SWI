@@ -3,6 +3,17 @@
 
 <div class="container-fluid">
 
+    
+    <input type="text" [(ngModel)]="title">
+    <button class="btn btn-sm btn-primary" type="button" (click)="addDoc()">Add Document</button>
+    <button class="btn btn-sm btn-default" (click)="checkConnection()">Check Connection</button>
+
+    <ul>
+        <li *ngFor="let doc of docs">
+            {{doc.title}}
+        </li>
+    </ul>
+
     <swi-builder-screen></swi-builder-screen>
     
 </div>

@@ -34,12 +34,12 @@ export class SwiBuilderFormComponent implements OnInit {
     // this.route.params
     //   .switchMap((params: Params) => 
 
-    this.swiService.getSWI(this.swi_id)
-      .subscribe((swi: SwiHeader) => {
-        this.swi = swi
-        this.headerForm.patchValue(this.swi);
-        console.log(this.swi);
-      });
+    // this.swiService.getSWI(this.swi_id)
+    //   .subscribe((swi: SwiHeader) => {
+    //     this.swi = swi
+    //     this.headerForm.patchValue(this.swi);
+    //     console.log(this.swi);
+    //   });
   }
 
   ngOnChanges(changes: SimpleChanges) {
