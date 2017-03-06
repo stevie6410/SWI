@@ -1,6 +1,6 @@
 import { SwiUser, SwiCompany } from './SwiSecurityModels';
 
-export class SwiHeader {
+export class SWIHeader {
     id: number;
     sequence: number;
     title: string;
@@ -10,13 +10,13 @@ export class SwiHeader {
     expert: SwiUser;
     approver: SwiUser;
     company: SwiCompany;
-    swihsItems: SwiHSItem[];
-    swiTools: SwiTool[];
-    swiStages: SwiStage[];
-    swiTags: SwiTag[];
+    swihsItems: SWIHSItem[];
+    swiTools: SWITool[];
+    swiStages: SWIStage[];
+    swiTags: SWITag[];
 }
 
-export class SwiHSItem {
+export class SWIHSItem {
     Id: number;
     Name: string;
     Image: any;
@@ -24,14 +24,14 @@ export class SwiHSItem {
     Company: SwiCompany;
 }
 
-export class SwiTool {
+export class SWITool {
     Id: number;
     Name: string;
     Caption: string;
     Image: any;
 }
 
-export class SwiStage {
+export class SWIStage {
     id: number;
     sequence: number;
     text: string;
@@ -40,13 +40,13 @@ export class SwiStage {
     criticalStep: boolean;
     carePoint: string;
     hyperlink: string;
-    relatedSwi: SwiHeader;
-    observations: SwiObservation[];
+    relatedSwi: SWIHeader;
+    observations: SWIObservation[];
 }
 
-export class SwiObservation {
+export class SWIObservation {
     Id: number;
-    SwiStage: SwiStage;
+    SwiStage: SWIStage;
     Text: string;
     Image: any;
     JobNumber: string;
@@ -56,7 +56,7 @@ export class SwiObservation {
     ModifiedOn: Date;
 }
 
-export class SwiTag {
+export class SWITag {
     Id: number;
     Name: string;
 }

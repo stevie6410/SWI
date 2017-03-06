@@ -1,0 +1,22 @@
+<p>
+  dashboard-screen works!
+</p>
+
+<input type="text" [(ngModel)]="title">
+<button class="btn btn-sm btn-primary" type="button" (click)="addDoc()">Add Document</button>
+<button class="btn btn-sm btn-default" (click)="checkConnection()">Check Connection</button>
+
+<ul>
+  <li *ngFor="let doc of docs">
+    {{doc.title}}
+  </li>
+</ul>
+
+
+<div *ngIf="doc">
+  <button class="btn btn-success" (click)="saveDocument()">Save Document</button>
+  <div *ngFor="let img of doc.swiImages">
+    <img height="300px" width="600px" [src]="'data:image/jpg;base64,' + img.value">
+    <h5>{{img.key}}</h5>
+  </div>
+</div>

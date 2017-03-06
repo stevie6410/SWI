@@ -1,0 +1,10 @@
+<div *ngIf="swiStage">
+
+  <input type="number" name="sequence" [(ngModel)]="swiStage.sequence">
+  <input type="text" name="text" [(ngModel)]="swiStage.text">
+  <input type="checkbox" name="criticalStep" [(ngModel)]="swiStage.criticalStep">
+  <input type="text" name="carePoint" [(ngModel)]="swiStage.carePoint">
+
+  <button type="button" (click)="save()" class="btn btn-sm btn-default">Add Stage</button>
+
+</div>

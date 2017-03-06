@@ -1,9 +1,22 @@
-<swi-builder-form></swi-builder-form>
+<h2>SWI Builder</h2>
+<p>_id: {{ _id }}</p>
+<p>_rev: {{ _rev }}</p>
+<p>title: {{swi?.title}}</p>
 
-<!--<div *ngIf="swiHeader">
-  <h5>{{swiHeader.title}}</h5>
-</div>
 
-<pre ng-if="swiHeader">
+<swi-builder-form [swi]="swi" (onSave)="saveDocument($event)"></swi-builder-form>
+
+<!--<pre ng-if="swiHeader">
     {{swiDiag}}
 </pre>-->
+
+<!--<h2>Create SWI Test</h2>
+
+<input type="text" name="_id" [(ngModel)]="_id" placeholder="_id">
+<input type="text" name="title" [(ngModel)]="title" placeholder="title">
+<input type="text" name="author" [(ngModel)]="author" placeholder="author">
+<button type="button" class="btn btn-primary" (click)="saveDocument()">Save Document</button>
+
+<ul>
+  <li *ngFor="let item of cataloge">{{item.doc.title}}</li>
+</ul>-->

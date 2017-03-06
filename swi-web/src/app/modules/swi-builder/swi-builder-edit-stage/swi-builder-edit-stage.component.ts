@@ -12,4 +12,8 @@ export class SwiBuilderEditStageComponent implements OnInit {
   ngOnInit() {
   }
 
+  open(){
+    console.log('Trying to open');
+  }
+
 }

@@ -10,15 +10,18 @@
       <button type="button" class="btn btn-sm btn-success">Approve</button>
       <button type="button" class="btn btn-sm btn-success">Make Public</button>
 
+
+      <button type="button" class="btn btn-sm btn-success" (click)="saveDocument()">Save Document</button>
+
     </div>
   </div>
 
   <!--Header Panel-->
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Standard Work Instruction</h3>
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Standard Work Instruction</h3>
     </div>
-    <div class="panel-body">
+    <div class="card-block">
 
       <form *ngIf="swi" class="form-horizontal" [formGroup]="headerForm" autocomplete="off" novalidate #hForm>
 
@@ -32,9 +35,9 @@
   </div>
 
   <!--Stages Panel-->
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title"> <span class="badge">{{swi.swiStages.length}}</span> Stages</h3>
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title"> <span class="badge badge-pill badge-primary">{{stageCount}}</span> Stages</h5>
     </div>
     <ul class="list-group">
       <li *ngFor="let stage of swi.swiStages" class="list-group-item">
@@ -61,13 +64,14 @@
         </div>
       </li>
     </ul>
-    <div class="panel-body">
-      <button type="button" class="btn btn-sm btn-success" (click)="addStageModal.open()">Add Stage</button>
+    <div class="card-block">
+      <button type="button" class="btn btn-sm btn-success" (click)="addStage()">Add Stage</button>
       <button type="button" class="btn btn-sm btn-success" (click)="reorderList()">Reorder</button>
     </div>
+    <div class="card-block">
+      <swi-builder-stage [swiStage]="newStage" (onSave)="saveStage()"></swi-builder-stage>
+    </div>
   </div>
-
-  <swi-builder-edit-stage #stageEditModal></swi-builder-edit-stage>
 
   <pre>
 	  {{ headerForm.value | json}}

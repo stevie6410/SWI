@@ -3,7 +3,7 @@ import { Http, Request, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx'; // adds ALL RxJS statics & operators to Observable
 
-import { SwiHeader } from '../../shared/models/SwiAppModels';
+import { SWIHeader } from '../../shared/models/SwiAppModels';
 
 @Injectable()
 export class SwiBuilderService {
@@ -16,14 +16,14 @@ export class SwiBuilderService {
 
   }
 
-  public getSWIs(): Observable<SwiHeader[]> {
+  public getSWIs(): Observable<SWIHeader[]> {
     return this.http.get(this.apiBaseUrl)
       // .do(console.log)
       .map(this.handleData)
       .catch(this.handleError);
   }
 
-  public getSWI(id: number): Observable<SwiHeader> {
+  public getSWI(id: number): Observable<SWIHeader> {
 
     let apiUrl = this.apiBaseUrl + (+id);
 

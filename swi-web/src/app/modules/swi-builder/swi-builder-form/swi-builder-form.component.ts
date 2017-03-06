@@ -1,9 +1,9 @@
-import { Component, OnInit, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import 'rxjs/add/operator/switchMap';
 
-import { SwiHeader, SwiStage } from '../../../shared/models/SwiAppModels';
+import { SWIHeader, SWIStage } from '../../../shared/models/SwiAppModels';
 import { SwiBuilderService } from '../../../shared/services/swi-builder.service';
 import { SwiBuilderEditStageComponent } from '../swi-builder-edit-stage/swi-builder-edit-stage.component';
 
@@ -14,32 +14,26 @@ import { SwiBuilderEditStageComponent } from '../swi-builder-edit-stage/swi-buil
 })
 export class SwiBuilderFormComponent implements OnInit {
 
-  @ViewChild('#stageEditModal') modal : SwiBuilderFormComponent;
-
-  swi: SwiHeader;
-  swi_id: number = 3;
+  @Input() swi: SWIHeader;
   headerForm: FormGroup;
+  newStage: SWIStage;
+  @Output() onSave: EventEmitter<SWIHeader> = new EventEmitter<SWIHeader>();
 
-
-  constructor(private swiService: SwiBuilderService, private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder
+  ) {
     //Build the form object
     this.headerForm = this.formBuilder.group({
       title: ['', Validators.required],
       revision: ['', Validators.required],
-      isReleased: ['', Validators.required]
+      isReleased: ['', Validators.required],
+      swiStages: this.formBuilder.array([
+        
+      ])
     });
   }
 
   ngOnInit() {
-    // this.route.params
-    //   .switchMap((params: Params) => 
-
-    // this.swiService.getSWI(this.swi_id)
-    //   .subscribe((swi: SwiHeader) => {
-    //     this.swi = swi
-    //     this.headerForm.patchValue(this.swi);
-    //     console.log(this.swi);
-    //   });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -50,27 +44,36 @@ export class SwiBuilderFormComponent implements OnInit {
     }
   }
 
-  openStageModal(){
-    this.modal.openStageModal();
+  get stageCount(): number {
+    return this.swi.swiStages ? this.swi.swiStages.length : 0;
   }
 
   addStage() {
-    let newStage = new SwiStage;
-    newStage.sequence = this.swi.swiStages.length + 1;
-    this.swi.swiStages.push(newStage);
+    this.newStage = new SWIStage;
+    this.newStage.sequence = this.swi.swiStages ? this.swi.swiStages.length + 1 : 1;
   }
 
-  removeStage(stage: SwiStage) {
+  saveStage() {
+    if (!this.swi.swiStages) this.swi.swiStages = new Array<SWIStage>();
+    this.swi.swiStages.push(this.newStage);
+    this.newStage = null;
+  }
+
+  removeStage(stage: SWIStage) {
     this.swi.swiStages = this.swi.swiStages.filter(s => s.sequence != stage.sequence);
     //now we need to update the sequence numbers as we may have removed a stage in the middle of the array
     this.reorderList();
   }
 
   reorderList() {
-     var stages: any[] = this.swi.swiStages;
-     for (var index = 0; index < stages.length; index++) {
-       stages[index].sequence = index + 1;
-     }
+    var stages: any[] = this.swi.swiStages;
+    for (var index = 0; index < stages.length; index++) {
+      stages[index].sequence = index + 1;
+    }
   }
 
+  saveDocument() {
+    console.log('Save Document from Form', this.headerForm.value);
+    this.onSave.emit(this.headerForm.value);
+  }
 }
